@@ -7,7 +7,11 @@ const cors = require('cors')
 const PORT = process.env.PORT || 3000
 
 
-app.use(cors())
+app.use(cors({
+	origin: "*",
+  	methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  	preflightContinue: false
+}))
 app.use(express.json())
 
 app.get('/videos', async(req, res) => {
