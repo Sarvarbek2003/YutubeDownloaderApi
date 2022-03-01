@@ -4,7 +4,6 @@ const ytdl = require('ytdl-core');
 const express = require('express')
 const app = express()
 const cors = require('cors');
-const { isError } = require('util');
 const PORT = process.env.PORT || 3000
 
 
@@ -16,12 +15,13 @@ app.use(cors({
 app.use(express.json())
 
 app.get('/videos', async(req, res) => {
+    console.log(path.join(process.cwd()))
     try{
         const { link } = req.query
         if( !link ) return res.send('hech narsa bo`midi')
         let fech = true 
         let response = await ytdl(link)
-                .pipe(a = await fs.createWriteStream(path.join(process.cwd(), 'files', link+'.mp4')));
+                .pipe(fs.createWriteStream(path.join(process.cwd(), 'files', link+'.mp4')));
         setInterval(async() => {
             if(fech){
                 if(response.closed == true){
