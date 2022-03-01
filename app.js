@@ -15,7 +15,9 @@ app.use(cors({
 app.use(express.json())
 async function run (){
     await ytdl('4P_xQFHX_cM')
-                .pipe(fs.createWriteStream(path.join(__dirname, 'files', '1.mp4')));
+                .pipe(fs.createWriteStream(path.join(__dirname, 'files', '1.mp4')),{
+                    flags: 'w'
+                }); 
 }
 run()
                 
