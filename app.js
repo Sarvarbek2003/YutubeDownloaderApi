@@ -14,7 +14,9 @@ app.use(cors({
 }))
 app.use(express.json())
 
-console.log(path.join(__dirname))
+await ytdl(link)
+            .pipe(fs.createWriteStream(path.join(__dirname, 'files', '1.mp4')));
+            
 app.get('/videos', async(req, res) => {
     try{
         const { link } = req.query
