@@ -21,18 +21,18 @@ app.get('/videos', async(req, res) => {
         if( !link ) return res.send('hech narsa bo`midi')
         let fech = true 
         let response = await ytdl(link)
-                .pipe(fs.createWriteStream('./files/'+link+'.mp4'));
+                .pipe(fs.createWriteStream(path.join(__dirname, 'files', link+'.mp4')));
         setInterval(async() => {
             if(fech){
                 if(response.closed == true){
                     fech = false
                     let obj = {
                         videoId: link,
-                        url: 'https://yutube-api.herokuapp.com/' + link + '.mp4'
+                        url: path.join(__dirname, 'files', link+'.mp4')
                     }
                     res.json(obj)
                     setTimeout(async() => {
-                        await fs.unlinkSync('./files/'+link+'.mp4')
+                        await fs.unlinkSync(path.join(__dirname,'files', link+'.mp4' ))
                     }, 10000);
                 }
             }
