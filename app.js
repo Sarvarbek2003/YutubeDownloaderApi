@@ -26,7 +26,7 @@ app.get('/videos', async(req, res) => {
                 res.json({download: obj.url})
                 setTimeout(async() => {
                     await fs.unlinkSync(path.join(process.cwd(),'files', link+'.mp4' ))
-                }, 5000);
+                }, 10000);
             }
         }
     }, 500);
