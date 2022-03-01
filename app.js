@@ -16,7 +16,7 @@ app.use(express.json())
 
 app.get('/videos', async(req, res) => {
     const { link } = req.query
-    if( !link ) res.send('hech narsa bo`midi')
+    if( !link ) return res.send('hech narsa bo`midi')
     let fech = true 
     let response = await ytdl(link)
             .pipe(a = await fs.createWriteStream(path.join(process.cwd(), 'files', link+'.mp4')));
