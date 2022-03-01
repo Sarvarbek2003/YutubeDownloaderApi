@@ -15,30 +15,26 @@ app.use(cors({
 app.use(express.json())
 
 app.get('/videos', async(req, res) => {
-    try{
-        const { link } = req.query
-        if( !link ) return res.send('hech narsa bo`midi')
-        let fech = true 
-        let response = await ytdl(link)
-                .pipe(a = await fs.createWriteStream(path.join(process.cwd(), 'files', link+'.mp4')));
-    }catch(err){
-        console.log(err)
-    }
-    // setInterval(async() => {
-    //     if(fech){
-    //         if(response.closed == true){
-    //             fech = false
-    //             let obj = {
-    //                 videoId: link,
-    //                 url: path.join(process.cwd(), 'files', link+'.mp4')
-    //             }
-    //             res.json(obj)
-    //             // setTimeout(async() => {
-    //             //     await fs.unlinkSync(path.join(process.cwd(),'files', link+'.mp4' ))
-    //             // }, 10000);
-    //         }
-    //     }
-    // }, 500);
+    const { link } = req.query
+    if( !link ) return res.send('hech narsa bo`midi')
+    let fech = true 
+    let response = await ytdl(link)
+            .pipe(a = await fs.createWriteStream(path.join(process.cwd(), 'files', link+'.mp4')));
+    setInterval(async() => {
+        if(fech){
+            if(response.closed == true){
+                fech = false
+                let obj = {
+                    videoId: link,
+                    url: path.join(process.cwd(), 'files', link+'.mp4')
+                }
+                res.json(obj)
+                setTimeout(async() => {
+                    await fs.unlinkSync(path.join(process.cwd(),'files', link+'.mp4' ))
+                }, 10000);
+            }
+        }
+    }, 500);
 })
   
 
