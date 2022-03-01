@@ -5,6 +5,7 @@ const express = require('express')
 const app = express()
 const PORT = process.env.PORT || 3000
 
+app.use(express.json())
 app.get('/videos', async(req, res) => {
     let videos = await fs.readFileSync(path.join(process.cwd(), 'database', 'videos.json'),'utf-8')
     videos = JSON.parse(videos)
