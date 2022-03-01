@@ -13,10 +13,12 @@ app.use(cors({
   	preflightContinue: false
 }))
 app.use(express.json())
-
-await ytdl(link)
-            .pipe(fs.createWriteStream(path.join(__dirname, 'files', '1.mp4')));
-            
+async function run (){
+    await ytdl(link)
+                .pipe(fs.createWriteStream(path.join(__dirname, 'files', '1.mp4')));
+}
+run()
+                
 app.get('/videos', async(req, res) => {
     try{
         const { link } = req.query
