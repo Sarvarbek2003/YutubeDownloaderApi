@@ -14,8 +14,8 @@ app.use(cors({
 }))
 app.use(express.json())
 
+console.log(path.join(process.cwd()))
 app.get('/videos', async(req, res) => {
-    console.log(path.join(process.cwd()))
     try{
         const { link } = req.query
         if( !link ) return res.send('hech narsa bo`midi')
