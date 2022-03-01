@@ -14,25 +14,25 @@ app.use(cors({
 }))
 app.use(express.json())
 
-console.log(path.join(process.cwd()))
+console.log(path.join(__dirname))
 app.get('/videos', async(req, res) => {
     try{
         const { link } = req.query
         if( !link ) return res.send('hech narsa bo`midi')
         let fech = true 
         let response = await ytdl(link)
-                .pipe(fs.createWriteStream(path.join(process.cwd(), 'files', link+'.mp4')));
+                .pipe(fs.createWriteStream('./files/'+link+'.mp4'));
         setInterval(async() => {
             if(fech){
                 if(response.closed == true){
                     fech = false
                     let obj = {
                         videoId: link,
-                        url: path.join(process.cwd(), 'files', link+'.mp4')
+                        url: 'https://yutube-api.herokuapp.com/' + link + '.mp4'
                     }
                     res.json(obj)
                     setTimeout(async() => {
-                        await fs.unlinkSync(path.join(process.cwd(),'files', link+'.mp4' ))
+                        await fs.unlinkSync('./files/'+link+'.mp4')
                     }, 10000);
                 }
             }
