@@ -33,7 +33,7 @@ app.get('/videos', async(req, res) => {
                     fech = false
                     let obj = {
                         videoId: link,
-                        url: 'https://yutube-api.herokuapp.com/files'+link+'.mp4'
+                        url: 'https://yutube-api.herokuapp.com/files/'+link+'.mp4'
                     }
                     res.json(obj)
                     setTimeout(async() => {
