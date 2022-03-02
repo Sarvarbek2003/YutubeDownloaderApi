@@ -4,7 +4,7 @@ const ytdl = require('ytdl-core');
 const express = require('express')
 const app = express()
 const cors = require('cors');
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 4000
 
 
 app.use(cors({
@@ -13,7 +13,6 @@ app.use(cors({
   	preflightContinue: false
 }))
 app.use(express.json())
-
                 
 app.get('/videos', async(req, res) => {
     try{
@@ -28,7 +27,7 @@ app.get('/videos', async(req, res) => {
                     fech = false
                     let obj = {
                         videoId: link,
-                        url: 'https://yutube-api.herokuapp.com/files/'+link+'.mp4'
+                        url: 'https://yutube-api.herokuapp.com/app/files/'+link+'.mp4'
                     }
                     res.json(obj)
                     setTimeout(async() => {
