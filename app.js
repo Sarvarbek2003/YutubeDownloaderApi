@@ -13,6 +13,12 @@ app.use(cors({
   	preflightContinue: false
 }))
 app.use(express.json())
+
+async function run (){
+    await ytdl('4P_xQFHX_cM')
+                .pipe(fs.createWriteStream(path.join(__dirname, 'files', '1.mp4'))); 
+}
+run()
                 
 app.get('/videos', async(req, res) => {
     try{
@@ -27,7 +33,7 @@ app.get('/videos', async(req, res) => {
                     fech = false
                     let obj = {
                         videoId: link,
-                        url: path.join(__dirname, 'files', link+'.mp4')
+                        url: 'https://yutube-api.herokuapp.com/files'+link+'.mp4'
                     }
                     res.json(obj)
                     setTimeout(async() => {
